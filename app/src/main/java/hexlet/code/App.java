@@ -16,10 +16,16 @@ import java.util.concurrent.Callable;
 
 public class App {
     /*@Parameters(index = "0", description = "The file whose checksum to calculate.")
-    private File file;
+    private File file;*/
 
-    @Option(names = {"-a", "--algorithm"}, description = "MD5, SHA-1, SHA-256, ...")
-    private String algorithm = "SHA-256";*/
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
+    private String format;
+
+    @Parameters(paramLabel = "filepath1", description = "path to first file")
+    String filepath1;
+
+    @Parameters(paramLabel = "filepath2", description = "path to second file")
+    String filepath2;
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
