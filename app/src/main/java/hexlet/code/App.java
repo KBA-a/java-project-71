@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "1.0",
+@Command(name = "genDiff", mixinStandardHelpOptions = true, version = "1.0",
     description = "Compares two configuration files and shows a difference.")
 
 public class App implements Callable<Integer> {
@@ -39,26 +39,26 @@ public class App implements Callable<Integer> {
         return 0;
     }
 
-    public String toString (List<Map<String, Object>> compareResult) {
-        var stringdiffFsonFiles = new StringBuilder("{\n");
+    public String toString(List<Map<String, Object>> compareResult) {
+        var stringDiffJsonFiles = new StringBuilder("{\n");
         for (var map: compareResult) {
             switch ((String) map.get("Status")) {
-                case "Add" -> stringdiffFsonFiles.append(getAddString(map));
-                case "Delete" -> stringdiffFsonFiles.append(getDeleteString(map));
-                case "Update" -> stringdiffFsonFiles.append(getUpdateString(map));
-                case "Same" -> stringdiffFsonFiles.append(getSameString(map));
+                case "Add" -> stringDiffJsonFiles.append(getAddString(map));
+                case "Delete" -> stringDiffJsonFiles.append(getDeleteString(map));
+                case "Update" -> stringDiffJsonFiles.append(getUpdateString(map));
+                case "Same" -> stringDiffJsonFiles.append(getSameString(map));
                 default -> throw new RuntimeException();
             }
         }
-        stringdiffFsonFiles.append("}");
-        return stringdiffFsonFiles.toString();
+        stringDiffJsonFiles.append("}");
+        return stringDiffJsonFiles.toString();
     }
-    public static StringBuilder getAddString (Map<String, Object> diffFile) {
+    public static StringBuilder getAddString(Map<String, Object> diffFile) {
         var stringBuild = new StringBuilder(" +");
         stringBuild.append(diffFile.get("Field")).append(": ")
                 .append(diffFile.get("New_value"))
                 .append("\n");
-      return stringBuild;
+        return stringBuild;
     }
     public static StringBuilder getDeleteString(Map<String, Object> diffFile) {
         var stringBuild = new StringBuilder(" -");
